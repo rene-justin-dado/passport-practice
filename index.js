@@ -30,9 +30,9 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.use(new LocalStrategy(localSodium.strategy))
-passport.serializeUser(localSodium.serialize)
-passport.deserializeUser(localSodium.deserialize)
+// passport.use(new LocalStrategy(localSodium.strategy))
+// passport.serializeUser(localSodium.serialize)
+// passport.deserializeUser(localSodium.deserialize)
 
 
 app.get('/', index.get)
@@ -41,6 +41,7 @@ app.get('/display', index.display)
 app.get('/login', index.loginForm)
 app.post('/login', index.login)
 
+app.get('/secret')
 
 
 app.listen(PORT, function () {

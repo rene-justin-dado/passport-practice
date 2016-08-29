@@ -2,6 +2,7 @@ const express = require('express')
 const development = require('../knexfile').development
 const knex = require('knex')(development)
 const passport = require('passport')
+const db = require('../lib/somethingWhatever')
 
 
 module.exports = {
@@ -32,7 +33,7 @@ function display (req, res) {
   knex('users')
     .select()
     .then(users => {
-      res.send(req.session.users)
+      res.render('index', req.session)
     })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
@@ -57,5 +58,10 @@ function loginForm (req, res) {
 // if username is aardvark@example.org.
 
 function login (req, res) {
-  console.log(req.body.name)
+  return knex ('users')
+  .select()
+  .where('name', req.body.username)
+  .then(data => {
+    res.render('index', {users: data})
+  })
 }
