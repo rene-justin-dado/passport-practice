@@ -40,11 +40,13 @@ app.get('/display', index.display)
 
 app.get('/login', index.loginForm)
 app.post('/login',
-passport.authenticate('local', {
+  passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
   }))
+
+
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)
