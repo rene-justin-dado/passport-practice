@@ -39,12 +39,7 @@ app.get('/', index.get)
 app.get('/display', index.display)
 
 app.get('/login', index.loginForm)
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-  }))
+app.post('/login', index.login)
 
 
 

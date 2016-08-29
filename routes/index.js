@@ -7,7 +7,8 @@ const passport = require('passport')
 module.exports = {
   get: get,
   display: display,
-  loginForm: loginForm
+  loginForm: loginForm,
+  login: login
 }
 
 function get (req, res) {
@@ -45,7 +46,7 @@ function display (req, res) {
 // Make the form's action /login, and use method POST.
 
 function loginForm (req, res) {
-  res.render('loginForm' )
+  res.render('loginForm')
 }
 
 // As an administrator, I only want to allow access to /secret to user
@@ -54,3 +55,7 @@ function loginForm (req, res) {
 // Implement Passport's local strategy, protecting /secret. Don't worry too much
 // about passwords just yet: return a user object from the database
 // if username is aardvark@example.org.
+
+function login (req, res) {
+  console.log(req.body.name)
+}
