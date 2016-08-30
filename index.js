@@ -13,7 +13,7 @@ const indexRoutes = require('./routes')
 
 var index = require('./routes/index')
 
-var PORT = 3000
+var PORT = process.env.port || 3000
 
 var app = express()
 app.engine('hbs', hbs())
@@ -30,9 +30,9 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-// passport.use(new LocalStrategy(localSodium.strategy))
-// passport.serializeUser(localSodium.serialize)
-// passport.deserializeUser(localSodium.deserialize)
+passport.use(new LocalStrategy(localSodium.strategy))
+passport.serializeUser(localSodium.serialize)
+passport.deserializeUser(localSodium.deserialize)
 
 
 app.get('/', index.get)

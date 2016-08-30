@@ -61,6 +61,7 @@ function login (req, res) {
   return knex ('users')
   .select()
   .where('name', req.body.username)
+  .andWhere('password', req.body.password)
   .then(data => {
     res.render('index', {users: data})
   })
