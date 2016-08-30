@@ -41,7 +41,9 @@ app.get('/display', index.display)
 app.get('/login', index.loginForm)
 app.post('/login', index.login)
 
-app.get('/secret')
+app.get('/secret', (req, res) => {
+  res.send("This is a Secret!")
+})
 
 
 app.listen(PORT, function () {
