@@ -7,15 +7,12 @@ const users = require('../lib/users')
 
 const db = require('../lib/somethingWhatever')
 
+const router = express.Router()
+module.exports = router
 
-module.exports = {
-  get: get,
-  display: display,
-  loginForm: loginForm,
-  login: login
-}
 
-function get (req, res) {
+
+router.get('/', (req, res) => {
   knex('users')
     .select()
     .then(function (users) {
@@ -25,14 +22,14 @@ function get (req, res) {
     .catch(function (err) {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
-}
+})
 // As a user, I want to load the list of users on the / route, but display them
 // on the /display route. Don't ask why, just do it!
 //
 // Sometimes client demands can be capricious. Store the list of
 // users in req.session and redirect to the other route.
 
-function display (req, res) {
+router.get('/display', (req, res) => {
   knex('users')
     .select()
     .then(users => {
@@ -41,7 +38,7 @@ function display (req, res) {
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
-}
+})
 
 // As a user, I want to see a login form whenever I visit /login so that
 // I can enter my username and password.
@@ -49,9 +46,7 @@ function display (req, res) {
 // one named 'password'.
 // Make the form's action /login, and use method POST.
 
-function loginForm (req, res) {
-  res.render('loginForm')
-}
+router.get('/login', (req, res) => res.render('loginForm'))
 
 // As an administrator, I only want to allow access to /secret to user
 // aardvark@example.org, so that I can limit access to the awesome secret inside.
@@ -60,7 +55,8 @@ function loginForm (req, res) {
 // about passwords just yet: return a user object from the database
 // if username is aardvark@example.org.
 
-function login (req, res) {
+router.post('/login', (req, res) => {
+  console.log(req.body)
   return knex ('users')
   .select()
   .where('name', req.body.username)
@@ -68,9 +64,9 @@ function login (req, res) {
   .then(data => {
     res.render('index', {users: data})
   })
-}
-
-function secret (req, res {
-  ensureLoggedIn(),
-  
 })
+
+// router.get('/secret', (req, res) => {
+//   ensureLoggedIn(),
+//
+// })

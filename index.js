@@ -29,13 +29,15 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get('/', index.get)
-app.get('/display', index.display)
+app.use('/', indexRoutes)
 
-app.get('/login', index.loginForm)
-app.post('/login', index.login)
-
-app.get('/secret', index.secret)
+// app.get('/', index.get)
+// app.get('/display', index.display)
+//
+// app.get('/login', index.loginForm)
+// app.post('/login', index.login)
+//
+// app.get('/secret', index.secret)
 
 // passport.use(new LocalStrategy(localSodium.strategy))
 // passport.serializeUser(localSodium.serialize)
