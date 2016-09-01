@@ -2,6 +2,9 @@ const express = require('express')
 const development = require('../knexfile').development
 const knex = require('knex')(development)
 const passport = require('passport')
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
+const users = require('../lib/users')
+
 const db = require('../lib/somethingWhatever')
 
 
@@ -65,3 +68,8 @@ function login (req, res) {
     res.render('index', {users: data})
   })
 }
+
+function secret (req, res {
+  ensureLoggedIn(),
+  
+})

@@ -20,7 +20,6 @@ app.engine('hbs', hbs())
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: true }))
-
 app.use(expressSession({
   resave: false,
   secret: 'CHANGE THIS IN PRODUCTION!',
@@ -30,10 +29,6 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-// passport.use(new LocalStrategy(localSodium.strategy))
-// passport.serializeUser(localSodium.serialize)
-// passport.deserializeUser(localSodium.deserialize)
-
 
 app.get('/', index.get)
 app.get('/display', index.display)
@@ -41,8 +36,11 @@ app.get('/display', index.display)
 app.get('/login', index.loginForm)
 app.post('/login', index.login)
 
-app.get('/secret')
+app.get('/secret', index.secret)
 
+// passport.use(new LocalStrategy(localSodium.strategy))
+// passport.serializeUser(localSodium.serialize)
+// passport.deserializeUser(localSodium.deserialize)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)
