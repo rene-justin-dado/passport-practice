@@ -13,7 +13,7 @@ const indexRoutes = require('./routes')
 
 var index = require('./routes/index')
 
-var PORT = 3000
+var PORT = process.env.port || 3000
 
 var app = express()
 app.engine('hbs', hbs())
@@ -28,7 +28,6 @@ app.use(expressSession({
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 app.get('/', index.get)
 app.get('/display', index.display)
